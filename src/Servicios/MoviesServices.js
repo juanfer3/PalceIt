@@ -8,7 +8,7 @@ function getMovies() {
     
     return axios.get(URL + 'movies')
         .then(function(response){
-            return response
+            return response.data
         })
         
 }

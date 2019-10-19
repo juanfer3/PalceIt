@@ -4,10 +4,16 @@ import './App.css';
 
 
 import MoviesList from './Components/Movies/MoviesList';
+import Navbar from 'react-materialize/lib/Navbar';
 
 function App() {
   return (
     <div>
+        <Navbar/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <MoviesList/>
        
        {/*

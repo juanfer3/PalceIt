@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
+
+import './Movies.css'
 
 import { getMovies } from '../../Servicios/MoviesServices'
 import MovieItem from './MovieItem';
@@ -22,25 +24,44 @@ class MoviesList extends Component {
         this.state={
             movies: []
         }
+
     }
 
     componentDidMount(){
-       getMovies().then(data => {
-            console.log(data);
+       getMovies().then(rsp => {
+        this.setState({
+            movies: rsp
+        })
+            
        });
     }
 
+    
+
 
     render() {
+        console.log(this.state.movies);
+
         return (
             <div>
-                <Row>
-                    {
-                        this.state.movies.map( movie=>
-                            <MovieItem></MovieItem>
-                        )  
-                    }
-                </Row>
+            
+                <a className="waves-effect waves-light btn modal-trigger btn-rigth" href="#modal1">Crear Pelicula</a>
+
+                <br/>
+                <br/>
+
+                <div className="row">
+                { 
+                    this.state.movies.map( (movie, index) => 
+                     <MovieItem
+                     url={movie.image_url}
+                     description={movie.description}
+                     name={movie.name}
+                     key={index}
+                     />
+                  )  
+                 }
+                 </div>
             </div>
         );
     }
