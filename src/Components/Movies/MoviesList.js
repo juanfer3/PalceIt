@@ -1,9 +1,5 @@
 import React, { Component,useState } from 'react';
 
-import './Movies.css'
-
-import { getMovies } from '../../Servicios/MoviesServices'
-
 import { 
     Button, 
     Card, 
@@ -15,9 +11,10 @@ import {
     Icon
 } from 'react-materialize';
 
-import MovieItem from './MovieItem';
 import MovieForm from './MovieForm';
+import MovieItem from './MovieItem';
 
+import { getMovies } from '../../Servicios/MoviesServices'
 
 
 class MoviesList extends Component {
@@ -27,9 +24,7 @@ class MoviesList extends Component {
         this.state={
             movies: []
         }
-
         this.addMovie  = this.addMovie.bind(this)
-
     }
 
     componentDidMount(){
@@ -79,22 +74,7 @@ class MoviesList extends Component {
                 </Row>
                         
                 
-                <br/>
-                <br/>
-
-                <MovieItem
-                     url={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkSFmodpznlVPUFqL1BZj1j4Ry6JElOlFRp0nkIqhOUmtksbsdA'}
-                     description={'movie.description'}
-                     name={'movie.name'}
-                     id={1}
-                    />
-
-                <MovieItem
-                     url={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkSFmodpznlVPUFqL1BZj1j4Ry6JElOlFRp0nkIqhOUmtksbsdA'}
-                     description={'movie.description2'}
-                     name={'movie.name2'}
-                     id={2}
-                    />
+            
 
               
 
@@ -106,6 +86,7 @@ class MoviesList extends Component {
                      url={movie.image_url}
                      description={movie.description}
                      name={movie.name}
+                     id={movie.id}
                      />
                   )  
                  }

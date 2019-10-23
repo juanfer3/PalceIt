@@ -1,5 +1,4 @@
-import React, { Component,useState  } from 'react';
-import { saveMovie } from '../../Servicios/MoviesServices'
+import React, { Component } from 'react';
 
 import { 
     Button, 
@@ -7,50 +6,110 @@ import {
     Row, 
     Col, 
     TextInput ,
-    Icon,
-    DatePicker
+    CardTitle,
+    Modal,
+    Table
 } from 'react-materialize';
 
-export default function ReservationMovieForm(props) {
-    const  { addMovie, movies } = props
-
-    const [ name, setName ] = useState('')
-    const [ description, setDescription ] = useState('')
-    const [ imageUrl, setImageUrl ] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwVkijfeK2buyFWNh_QxftbBr0TZ06OTmlqPuYwJCZYoufrcmy')
-    const [ startDate, setStartDate ] = useState('')
-    const [ endDate, setEndDate ] = useState('')
-
-    const saveData = () => {
-        let movie = {
-            name,
-            description,
-            image_url: imageUrl,
-            start_date: startDate,
-            end_date: endDate,
+import { getReservationMovies } from '../../Servicios/MoviesServices'
+class ReservationMovie extends Component {
+    constructor(props){
+        super(props)
+        this.state={
+            reservations: [],
+            reservations_list: [],
+            search: ''
         }
-
-        saveMovie(movie)
-            .then(data =>{
-                console.log(data);
-                addMovie(data)
+        this.handleChange = this.handleChange.bind(this)
+    }
+    
+    componentDidMount(){
+        getReservationMovies().then(data => {
+        
+        
+            this.setState({
+                reservations: data,
+                reservations_list: data
             })
+            /* */
+                
+        });
+     }
+
+     handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+
+        if(this.state.search != ''){
+            
+            
+        }else{
+            console.log('vacio');
+            
+            let reservations = this.state.reservations
+            this.setState({
+                reservations_list: reservations,
+            })
+        }        
     }
 
-     
-    return (
-        <div>
-            <TextInput label="Título" onChange={ e => setName(e.target.value)} />
-            <TextInput label="Sipnosis" onChange={ e => setDescription(e.target.value)}/>
-            <TextInput label="url" value={imageUrl} onChange={ e => setImageUrl(e.target.value)}/>
-            <DatePicker options={{ format: 'yyyy-mm-dd'}} label="Fecha inicial" onChange={ e => setStartDate(e)}/>
-            <DatePicker options={{ format: 'yyyy-mm-dd'}} label="Fecha inicial" onChange={ e => setStartDate(e)}/>
-            <Button onClick={saveData}> 
-                <Icon left>
-                    cloud
-                </Icon>
-                Crear Nueva Película
-            </Button>
-        </div>
-    );
-    
+    render() {
+
+        return (
+            <div className="container">
+
+            <TextInput label="Título" 
+            name="search"
+            value={this.state.search}
+            onChange={e => this.handleChange(e)}
+            />
+
+            <Table>
+            <thead>
+                <tr>
+                    <th data-field="id">
+                        Película
+                    </th>
+                    <th data-field="name">
+                        Nombre Reservante
+                    </th>
+                    <th data-field="price">
+                        Correo Electrónico
+                    </th>
+                    <th data-field="price">
+                        Celular
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+
+                
+                    this.state.reservations_list.map((res, index) =>
+                    <tr key={index}>
+                        <td>
+                            {res.movie.name}
+                        </td>
+                        <td>
+                            {res.name}
+                        </td>
+                        <td>
+                            {res.email}
+                        </td>
+                        <td>
+                            {res.identification}
+                        </td>
+                        
+                    </tr>
+                    )
+                    /* */
+                }
+            </tbody>
+            </Table>
+            </div>
+        );
+    }
 }
+
+export default ReservationMovie;

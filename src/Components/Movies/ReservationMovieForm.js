@@ -1,7 +1,4 @@
 import React, { Component,useState  } from 'react';
-import { saveReservationMovie } from '../../Servicios/MoviesServices'
-
-//import DateFnsUtils from "@date-io/date-fns";
 
 import { 
     Button, 
@@ -13,6 +10,9 @@ import {
     DatePicker
 } from 'react-materialize';
 
+import { saveReservationMovie } from '../../Servicios/MoviesServices'
+
+
 export default function ReservationMovieForm(props) {
     const  { id } = props
     
@@ -20,6 +20,8 @@ export default function ReservationMovieForm(props) {
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwVkijfeK2buyFWNh_QxftbBr0TZ06OTmlqPuYwJCZYoufrcmy')
     const [ day_reservation, setDay_reservation ] = useState('')
+
+    
 
     const saveReservation = () => {
         let reservation = {
@@ -30,19 +32,25 @@ export default function ReservationMovieForm(props) {
             day_reservation
         }
 
+        console.log(reservation);
         
 
+        
+        
         saveReservationMovie(reservation)
             .then(data =>{
-                //console.log(data);
+                console.log(data);
             })
+        
     }
 
      
+     
     return (
-        <div>
-            <h3>  </h3>
 
+        
+
+        <div>
             <TextInput label="Identificación" onChange={ e => setIdentification(e.target.value)} />
             <TextInput label="Nombre" onChange={ e => setName(e.target.value)}/>
             <TextInput label="Email"  onChange={ e => setEmail(e.target.value)}/>

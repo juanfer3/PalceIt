@@ -22,9 +22,18 @@ function saveMovie(movie) {
         
 }
 
-function saveReservationMovie(movie) {
+function saveReservationMovie(reservation_movie) {
     
-    return axios.post(URL + 'movies', { movie: movie } )
+    return axios.post(URL + 'reservation_movies', reservation_movie )
+        .then(function(response){
+        return response.data
+    })
+        
+}
+
+function getReservationMovies() {
+    
+    return axios.get(URL + 'reservation_movies' )
         .then(function(response){
         return response.data
     })
@@ -34,5 +43,6 @@ function saveReservationMovie(movie) {
 export {
     getMovies,
     saveMovie,
+    getReservationMovies,
     saveReservationMovie
 }

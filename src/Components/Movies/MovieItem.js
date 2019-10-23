@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 
-import './Movies.css'
 import { 
     Button, 
-    Card, 
-    Row, 
-    Col, 
-    TextInput ,
-    CardTitle,
     Modal,
 } from 'react-materialize';
 

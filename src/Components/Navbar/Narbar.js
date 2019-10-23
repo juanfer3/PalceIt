@@ -5,7 +5,7 @@ class Narbar extends Component {
         return (
                 <nav className="nav-extended" >
                     <div className="nav-wrapper">
-                        <h3>PlaceIt</h3>
+                    
                     </div>
                     <div className="nav-content">
                     
