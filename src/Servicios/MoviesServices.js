@@ -22,7 +22,17 @@ function saveMovie(movie) {
         
 }
 
+function saveReservationMovie(movie) {
+    
+    return axios.post(URL + 'movies', { movie: movie } )
+        .then(function(response){
+        return response.data
+    })
+        
+}
+
 export {
     getMovies,
-    saveMovie
+    saveMovie,
+    saveReservationMovie
 }
