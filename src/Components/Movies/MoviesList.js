@@ -3,7 +3,6 @@ import React, { Component,useState } from 'react';
 import './Movies.css'
 
 import { getMovies } from '../../Servicios/MoviesServices'
-import MovieItem from './MovieItem';
 
 import { 
     Button, 
@@ -12,8 +11,12 @@ import {
     Col, 
     TextInput ,
     CardTitle,
+    Modal,
+    Icon
 } from 'react-materialize';
 
+import MovieItem from './MovieItem';
+import MovieForm from './MovieForm';
 
 
 
@@ -24,6 +27,8 @@ class MoviesList extends Component {
         this.state={
             movies: []
         }
+
+        this.addMovie  = this.addMovie.bind(this)
 
     }
 
@@ -36,28 +41,51 @@ class MoviesList extends Component {
        });
     }
 
+    addMovie(movie){
+        
+        this.state.movies.push(movie)
+        
+        this.setState({
+            movies: this.state.movies
+        })
+        /* */
+    }
     
-
 
     render() {
         console.log(this.state.movies);
 
         return (
-            <div>
-            
-                <a className="waves-effect waves-light btn modal-trigger btn-rigth" href="#modal1">Crear Pelicula</a>
+            <div className="container">
+                <Modal className="modalMovieForm" header="Crear Película" trigger={
+                <Button> 
+                    <Icon left>
+                        cloud
+                    </Icon>
+                    Crear Nueva Película
+                </Button>}>
+                    
+                    <MovieForm
+                    addMovie={this.addMovie}
+                    />
 
+                </Modal>
+                
                 <br/>
                 <br/>
+
+
+
+              
 
                 <div className="row">
                 { 
-                    this.state.movies.map( (movie, index) => 
+                    this.state.movies.map( (movie, i) => 
                      <MovieItem
+                     key={i}
                      url={movie.image_url}
                      description={movie.description}
                      name={movie.name}
-                     key={index}
                      />
                   )  
                  }

@@ -1,3 +1,43 @@
 .btn-rigth{
     text-align: right;
 }
+
+
+.image_movie {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.figure{
+    width: 100%;
+}
+
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    margin-top: -15%;
+    transform: translate(-12%, -300%);
+    -ms-transform: translate(0%, 0%);
+    text-align: center;
+}
+
+.container_img:hover .image_movie{
+    opacity: 0.3;
+    
+}
+
+.container_img:hover:hover .middle {
+    opacity: 1;
+}
+
+.button_movie {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+.modalMovieForm{
+}

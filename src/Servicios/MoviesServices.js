@@ -13,6 +13,16 @@ function getMovies() {
         
 }
 
+function saveMovie(movie) {
+    
+    return axios.post(URL + 'movies', { movie: movie } )
+        .then(function(response){
+        return response.data
+    })
+        
+}
+
 export {
-    getMovies
+    getMovies,
+    saveMovie
 }
