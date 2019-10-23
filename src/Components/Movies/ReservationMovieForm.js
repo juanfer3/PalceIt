@@ -14,7 +14,7 @@ import { saveReservationMovie } from '../../Servicios/MoviesServices'
 
 
 export default function ReservationMovieForm(props) {
-    const  { id } = props
+    const  { id, description } = props
     
     const [ identification, setIdentification ] = useState('')
     const [ name, setName ] = useState('')
@@ -51,6 +51,13 @@ export default function ReservationMovieForm(props) {
         
 
         <div>
+
+            <p>
+                <strong>Sinopsis:</strong><br/>
+                { description }
+            </p>
+            <br/>
+
             <TextInput label="Identificación" onChange={ e => setIdentification(e.target.value)} />
             <TextInput label="Nombre" onChange={ e => setName(e.target.value)}/>
             <TextInput label="Email"  onChange={ e => setEmail(e.target.value)}/>

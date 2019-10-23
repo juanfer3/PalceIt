@@ -8,7 +8,8 @@ import {
     TextInput ,
     CardTitle,
     Modal,
-    Icon
+    Icon,
+    DatePicker
 } from 'react-materialize';
 
 import MovieForm from './MovieForm';
@@ -22,7 +23,8 @@ class MoviesList extends Component {
     constructor(props){
         super(props)
         this.state={
-            movies: []
+            movies: [],
+            search: []
         }
         this.addMovie  = this.addMovie.bind(this)
     }
@@ -48,7 +50,7 @@ class MoviesList extends Component {
     
 
     render() {
-       // console.log(this.state.movies);
+
 
         return (
             <div className="container">
@@ -60,7 +62,7 @@ class MoviesList extends Component {
                         <Modal className="modalMovieForm" header="Crear Película" trigger={
                             <Button> 
                                 <Icon left>
-                                    cloud
+                                    control_point
                                 </Icon>
                                 Crear Nueva Película
                             </Button>}>
@@ -70,6 +72,13 @@ class MoviesList extends Component {
                                 />
 
                         </Modal>
+                    </Col>
+                    <Col s={12}>
+                        <TextInput label="Filtar por fecha yyyy-mm-dd" 
+                        name="search"
+                        value={this.state.search}
+                        onChange={e => this.handleChange(e)}
+                        />
                     </Col>
                 </Row>
                         

@@ -1,5 +1,4 @@
 import React, { Component,useState  } from 'react';
-import { saveMovie } from '../../Servicios/MoviesServices'
 
 import { 
     Button, 
@@ -10,6 +9,9 @@ import {
     Icon,
     DatePicker
 } from 'react-materialize';
+
+
+import { saveMovie } from '../../Servicios/MoviesServices'
 
 export default function MoviesForm(props) {
     const  { addMovie, movies } = props
@@ -31,7 +33,6 @@ export default function MoviesForm(props) {
 
         saveMovie(movie)
             .then(data =>{
-                console.log(data);
                 addMovie(data)
             })
     }
@@ -46,7 +47,7 @@ export default function MoviesForm(props) {
             <DatePicker options={{ format: 'yyyy-mm-dd'}} label="Fecha inicial" onChange={ e => setStartDate(e)}/>
             <Button onClick={saveData}> 
                 <Icon left>
-                    cloud
+                    control_point 
                 </Icon>
                 Crear Nueva Película
             </Button>

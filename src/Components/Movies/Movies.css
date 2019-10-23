@@ -18,7 +18,7 @@
     transition: .5s ease;
     opacity: 0;
     margin-top: -15%;
-    transform: translate(-12%, -300%);
+    transform: translate(-19%, -300%);
     -ms-transform: translate(0%, 0%);
     text-align: center;
 }
@@ -39,5 +39,3 @@
     padding: 16px 32px;
 }
 
-.modalMovieForm{
-}

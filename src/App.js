@@ -9,30 +9,30 @@ import logo from './logo.svg';
 import MoviesList from './Components/Movies/MoviesList';
 import ReservationMovie from './Components/Movies/ReservationMovie';
 
-import { HashRouter, Switch, Route } from "react-router-dom"
+import { HashRouter, Switch, Route, Link } from "react-router-dom"
 
 function App() {
   return (
     <div>
-        <Navbar
-
         
-
-        className="blue darken-3"
-        brand={<h2>PlaceIt</h2> } alignLinks="right"
-        >
-          <NavItem href="">
-            Películas
-          </NavItem>
-          <NavItem href="">
-            Reservaciones
-          </NavItem>
-        </Navbar>
-        <br/>
-        <br/>
         
         <HashRouter> {/* envolvemos nuestra aplicación en el Router  */}
-              <Switch>
+            <Navbar
+            className="blue darken-3"
+            brand={<h2>PlaceIt</h2> } alignLinks="right"
+            >
+              <NavItem to="/">
+                <Link to="/">Películas</Link>
+                </NavItem>
+                <NavItem href="">
+                  <Link to="reservations_movies">Reservaciones</Link>
+                
+                </NavItem>
+                  
+              </Navbar>
+              <br/>
+              <br/>      
+        <Switch>
                 <Route path='/' exact component={MoviesList} />
                 <Route path='/movies_list' component={MoviesList}/>
                 <Route path='/reservations_movies' component={ReservationMovie}/>

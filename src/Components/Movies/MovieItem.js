@@ -5,11 +5,13 @@ import {
     Modal,
 } from 'react-materialize';
 
+import './Movies.css'
+
 import ReservationMovieForm from './ReservationMovieForm'
 
 export default function MoviesItem(props) {
     const { url, name, description, id } = props
-    console.log(props)
+
     return (
         <div className="col s12 m4 ">
             <div className="container_img">
@@ -20,16 +22,16 @@ export default function MoviesItem(props) {
                     src={url}
                     />
                     <div className="middle">
-                        <Modal header="Modal Header" trigger={<Button>Reservar</Button>}>
+                    <span className="card-title">{name}</span> <br/>
+                        <Modal header={name} trigger={<Button>Reservar</Button>}>
                             <ReservationMovieForm
                             id={id}
+                            description={description}
                             ></ReservationMovieForm>
+                            
                         </Modal>
                     </div>
-                    <span className="card-title">{name}</span>
-                    <p>
-                        {description}
-                    </p>
+                    
 
                     
             </div>

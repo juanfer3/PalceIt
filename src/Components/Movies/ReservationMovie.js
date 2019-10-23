@@ -8,7 +8,8 @@ import {
     TextInput ,
     CardTitle,
     Modal,
-    Table
+    Table,
+    DatePicker
 } from 'react-materialize';
 
 import { getReservationMovies } from '../../Servicios/MoviesServices'
@@ -18,6 +19,7 @@ class ReservationMovie extends Component {
         this.state={
             reservations: [],
             reservations_list: [],
+            //days: new Date('2014-04-03'),
             search: ''
         }
         this.handleChange = this.handleChange.bind(this)
@@ -25,7 +27,8 @@ class ReservationMovie extends Component {
     
     componentDidMount(){
         getReservationMovies().then(data => {
-        
+            console.log(data);
+            
         
             this.setState({
                 reservations: data,
@@ -41,25 +44,56 @@ class ReservationMovie extends Component {
             [e.target.name]: e.target.value
         })
 
-        if(this.state.search != ''){
-            
-            
-        }else{
-            console.log('vacio');
-            
-            let reservations = this.state.reservations
-            this.setState({
-                reservations_list: reservations,
-            })
-        }        
+              
     }
 
     render() {
+        let list = []
+        if(this.state.reservations){
+            
+ 
+            list = this.state.reservations
+            .filter(value => {
+                if(value.day_reservation.indexOf(this.state.search) >= 0){
+                    
+                    return value.day_reservation.indexOf(this.state.search) >= 0
+                }
+            })
+            .map((res, index) => 
+            <tr key={index}>
+                <td>
+                    {res.movie.name}
+                </td>
+                <td>
+                    {res.day_reservation}
+                </td>
+                <td>
+                    {res.name}
+                </td>
+                <td>
+                    {res.email}
+                </td>
+                <td>
+                    {res.identification}
+                </td>
+                
+            </tr>
+            );
+            
+            console.log(list);
+            
+            
+        }
 
         return (
             <div className="container">
 
-            <TextInput label="Título" 
+            <h2>
+                { /*this.state.days.toDateString()*/ }
+            </h2>
+            
+
+            <TextInput label="Filtar por fecha yyyy-mm-dd" 
             name="search"
             value={this.state.search}
             onChange={e => this.handleChange(e)}
@@ -72,39 +106,22 @@ class ReservationMovie extends Component {
                         Película
                     </th>
                     <th data-field="name">
+                        Fecha Reserva
+                    </th>
+                    <th data-field="name">
                         Nombre Reservante
                     </th>
                     <th data-field="price">
                         Correo Electrónico
                     </th>
                     <th data-field="price">
-                        Celular
+                        Identificación
                     </th>
                 </tr>
             </thead>
             <tbody>
-                {
-
+                {list}
                 
-                    this.state.reservations_list.map((res, index) =>
-                    <tr key={index}>
-                        <td>
-                            {res.movie.name}
-                        </td>
-                        <td>
-                            {res.name}
-                        </td>
-                        <td>
-                            {res.email}
-                        </td>
-                        <td>
-                            {res.identification}
-                        </td>
-                        
-                    </tr>
-                    )
-                    /* */
-                }
             </tbody>
             </Table>
             </div>
