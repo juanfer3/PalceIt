@@ -20,3 +20,39 @@
 .App-link {
   color: #09d3ac;
 }
+
+
+.navBarFirst{
+    font-size: 39px;
+    margin-top: -20px;
+    margin-left: 15px;
+
+}
+
+.FilmsNav{
+  color: white;
+  font-size: 20px;
+  margin-top: auto;
+}
+
+.FilmsRes{
+  color: white;
+  font-size: 20px;
+  margin-top: auto;
+  margin-right: 50px;
+}
+
+@media (max-width: 1200px) {
+  .FilmsNav{
+    color: black;
+    font-size: 20px;
+    margin-top: auto;
+  }
+
+  .FilmsRes{
+    color: black;
+    font-size: 20px;
+    margin-top: auto;
+    margin-right: 50px;
+  }
+}

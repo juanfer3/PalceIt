@@ -9,22 +9,22 @@ import logo from './logo.svg';
 import MoviesList from './Components/Movies/MoviesList';
 import ReservationMovie from './Components/Movies/ReservationMovie';
 
-import { HashRouter, Switch, Route, Link } from "react-router-dom"
+import { HashRouter, Switch, Route, Link, Router } from "react-router-dom"
 
 function App() {
   return (
     <div>
         
-        
+
         <HashRouter> {/* envolvemos nuestra aplicación en el Router  */}
             <Navbar
             className="blue darken-3"
-            brand={<h2>PlaceIt</h2> } alignLinks="right"
+            brand={<h2><p className="navBarFirst">PlaceIt</p> </h2> } alignLinks="right"
             >
-              <NavItem to="/">
+              <NavItem >
                 <Link to="/">Películas</Link>
                 </NavItem>
-                <NavItem href="">
+                <NavItem >
                   <Link to="reservations_movies">Reservaciones</Link>
                 
                 </NavItem>
@@ -32,7 +32,7 @@ function App() {
               </Navbar>
               <br/>
               <br/>      
-        <Switch>
+              <Switch>
                 <Route path='/' exact component={MoviesList} />
                 <Route path='/movies_list' component={MoviesList}/>
                 <Route path='/reservations_movies' component={ReservationMovie}/>

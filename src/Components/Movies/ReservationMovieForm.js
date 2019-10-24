@@ -18,10 +18,9 @@ export default function ReservationMovieForm(props) {
     
     const [ identification, setIdentification ] = useState('')
     const [ name, setName ] = useState('')
-    const [ email, setEmail ] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSwVkijfeK2buyFWNh_QxftbBr0TZ06OTmlqPuYwJCZYoufrcmy')
+    const [ email, setEmail ] = useState('')
     const [ day_reservation, setDay_reservation ] = useState('')
-
-    
+    const [ alert, setAlert ] = useState(false)
 
     const saveReservation = () => {
         let reservation = {
@@ -32,14 +31,18 @@ export default function ReservationMovieForm(props) {
             day_reservation
         }
 
-        console.log(reservation);
-        
 
-        
-        
         saveReservationMovie(reservation)
             .then(data =>{
-                console.log(data);
+                setIdentification('')
+                setName('')
+                setEmail('')
+                setDay_reservation('')
+                setAlert(true)
+                setTimeout(() => {
+                    setAlert(false)
+                  }, 3000);
+               
             })
         
     }
@@ -48,20 +51,21 @@ export default function ReservationMovieForm(props) {
      
     return (
 
-        
-
         <div>
-
             <p>
                 <strong>Sinopsis:</strong><br/>
                 { description }
             </p>
             <br/>
 
-            <TextInput label="Identificación" onChange={ e => setIdentification(e.target.value)} />
-            <TextInput label="Nombre" onChange={ e => setName(e.target.value)}/>
-            <TextInput label="Email"  onChange={ e => setEmail(e.target.value)}/>
-            <DatePicker options={{ format: 'yyyy-mm-dd', minDate:new Date('2019-10-10') }} label="Fecha inicial" onChange={ e => setDay_reservation(e)}/>
+            <div className={alert ? 'card-panel white-text teal darken-1' : 'hidden'}>
+                Resgistro Exitoso
+            </div>
+
+            <TextInput label="Identificación" value={identification} onChange={ e => setIdentification(e.target.value)} />
+            <TextInput label="Nombre" value={name} onChange={ e => setName(e.target.value)}/>
+            <TextInput label="Email" value={email} onChange={ e => setEmail(e.target.value)}/>
+            <DatePicker value={day_reservation} options={{ format: 'yyyy-mm-dd', minDate:new Date('2019-10-10') }} label="Dia de reserva" onChange={ e => setDay_reservation(e)}/>
             <Button onClick={saveReservation}> 
                 <Icon left>
                     cloud

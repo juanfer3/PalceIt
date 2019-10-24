@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 
 import { 
-    Button, 
-    Card, 
-    Row, 
-    Col, 
     TextInput ,
-    CardTitle,
-    Modal,
     Table,
-    DatePicker
 } from 'react-materialize';
 
 import { getReservationMovies } from '../../Servicios/MoviesServices'
@@ -27,24 +20,17 @@ class ReservationMovie extends Component {
     
     componentDidMount(){
         getReservationMovies().then(data => {
-            console.log(data);
-            
-        
             this.setState({
                 reservations: data,
                 reservations_list: data
-            })
-            /* */
-                
+            })   
         });
      }
 
-     handleChange(e){
+    handleChange(e){
         this.setState({
             [e.target.name]: e.target.value
-        })
-
-              
+        })         
     }
 
     render() {
@@ -80,17 +66,13 @@ class ReservationMovie extends Component {
             </tr>
             );
             
-            console.log(list);
-            
             
         }
 
         return (
             <div className="container">
 
-            <h2>
-                { /*this.state.days.toDateString()*/ }
-            </h2>
+   
             
 
             <TextInput label="Filtar por fecha yyyy-mm-dd" 

@@ -1,12 +1,9 @@
-import React, { Component,useState } from 'react';
+import React, { Component } from 'react';
 
 import { 
     Button, 
-    Card, 
     Row, 
     Col, 
-    TextInput ,
-    CardTitle,
     Modal,
     Icon,
     DatePicker
@@ -24,9 +21,11 @@ class MoviesList extends Component {
         super(props)
         this.state={
             movies: [],
-            search: []
+            search: ''
         }
+
         this.addMovie  = this.addMovie.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount(){
@@ -34,23 +33,58 @@ class MoviesList extends Component {
         this.setState({
             movies: rsp
         })
-            
        });
     }
 
     addMovie(movie){
-        
         this.state.movies.push(movie)
-        
         this.setState({
             movies: this.state.movies
         })
-        /* */
+    }
+
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        })         
     }
     
 
     render() {
-
+        let list = []
+        if(this.state.movies.length > 0){
+            
+                if(this.state.search != ''){
+                    list = this.state.movies
+                    .filter((value) => {
+                        if(new Date(value.start_date) <= new Date(this.state.search)&& new Date(value.end_date) >= new Date(this.state.search) ){
+                            
+                            return value;
+                        }
+                    })
+                    .map((movie, i) => 
+                        <MovieItem
+                        key={i}
+                        url={movie.image_url}
+                        description={movie.description}
+                        name={movie.name}
+                        id={movie.id}
+                        />
+                    );
+                }else{
+                    list = this.state.movies
+                    .map((movie, i) => 
+                        <MovieItem
+                        key={i}
+                        url={movie.image_url}
+                        description={movie.description}
+                        name={movie.name}
+                        id={movie.id}
+                        />
+                    );
+                }
+        }
 
         return (
             <div className="container">
@@ -73,32 +107,18 @@ class MoviesList extends Component {
 
                         </Modal>
                     </Col>
-                    <Col s={12}>
-                        <TextInput label="Filtar por fecha yyyy-mm-dd" 
-                        name="search"
-                        value={this.state.search}
-                        onChange={e => this.handleChange(e)}
-                        />
-                    </Col>
+                    
                 </Row>
+                <Col md={12} sm={12}>
+                    <DatePicker 
+                    label='Filtrar por Fecha yyyy-mm-dd'
+                    options={{ format: 'yyyy-mm-dd', minDate:new Date('2019-10-10') }}  
+                    onChange={ e => this.setState({ search: e })}/>
+                </Col>
                         
-                
-            
-
-              
-
                 <div className="row">
-                { 
-                    this.state.movies.map( (movie, i) => 
-                     <MovieItem
-                     key={i}
-                     url={movie.image_url}
-                     description={movie.description}
-                     name={movie.name}
-                     id={movie.id}
-                     />
-                  )  
-                 }
+                    {list}
+                    <br/>
                  </div>
             </div>
         );
